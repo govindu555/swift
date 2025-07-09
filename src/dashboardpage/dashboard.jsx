@@ -1,0 +1,82 @@
+import { useEffect, useState } from "react";
+import {ClimbingBoxLoader} from "react-spinners"
+import "./dashboard.css"
+import { NavLink } from "react-router-dom";
+
+
+const DashboardPage=()=>{
+
+    const [userdata,setUserdata]=useState([])
+    const [pagesize,setPagesize]=useState(10)
+    const [count,setCount]=useState(1)
+
+    useEffect(()=>{
+               fetch("https://jsonplaceholder.typicode.com/comments")
+              .then(res=>res.json())
+              .then(res=>setUserdata(res.slice((count-1)*parseInt(pagesize),count*parseInt(pagesize))))        
+
+    },[count,pagesize])
+
+    const searchfun=(e)=>{
+         setUserdata(userdata.filter(item=>item.name.includes(e.target.value) || item.email.includes(e.target.value) || item.body.includes(e.target.value)))
+}
+
+    return(
+        <div className="dashboard">
+            <div className="dashmain">
+                <div className="sortmain">
+                    <button className="sort">Sort Post ID</button>
+                    <button className="sort">Sort Name</button>
+                    <button className="sort">Sort Email</button>
+                </div>
+                    <input className="search" type="search" placeholder="Search name,email,comment" onChange={searchfun}/>
+            </div>
+            <div className="table">
+                <div className="head">
+                    <h1 className="head1">PostId</h1>
+                    <h1 className="head1">Name</h1>
+                    <h1 className="head1">Email</h1>
+                    <h1 className="head1">Comment</h1>
+                </div>
+              {userdata.length? <div className="colums">
+                    {userdata.map((item,index)=>(
+                        <div>
+                      <NavLink to="/profile">
+                          <div key={index} className="table2">
+                            <h1 className="body">{item.postId}</h1>
+                            <h1 className="body">{item.name}</h1>
+                            <h1 className="body">{item.email}</h1>
+                            <h1 className="body">{item.body}</h1>
+                        </div>
+                        </NavLink> 
+                        <hr className="line"/>
+                        </div>
+                    ))
+                    }
+                </div>:<div className="spinner"><ClimbingBoxLoader
+                       color="#ab2cb7"
+                       cssOverride={{}}
+                       loading
+                       size={25}
+                       speedMultiplier={2}
+                       /></div>}
+            </div>
+            <div className="pagenation">
+                <span className="items">1 - {pagesize} of 100 items</span>
+                <button className="arrow" onClick={()=>setCount(count-1)} disabled={count==1}>{`<<<`}</button>
+                <span className="number">{count}</span>
+                <button className="arrow" onClick={()=>setCount(count+1)} disabled={count==500/pagesize}>{`>>>`}</button>
+                <div>
+                    <select className="select" onChange={(e)=>setPagesize(parseInt(e.target.value))}>
+                        <option>10</option>
+                        <option>5</option>
+                        <option>50</option>
+                        <option>100</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default DashboardPage;

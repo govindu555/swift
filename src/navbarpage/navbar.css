@@ -1,0 +1,42 @@
+.navbar{
+    width: 100vw;
+    top: 0px;
+    position:fixed;
+}
+
+.navbarmain{
+    width: 100vw;
+    height: 70px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(20, 20, 122);
+
+}
+
+.logo{
+    color: white;
+    font-size: 20px;
+    margin-left: 120px;
+}
+
+.logospeciall{
+    background-color: green;
+    padding: 5px;
+}
+
+.navbarmain2{
+    margin-top: 15px;
+}
+
+.logocircle{
+    background-color: white;
+    padding: 6px;
+    border-radius: 50px;
+}
+
+.logotext{
+    color: white;
+    margin-left: 10px;
+    margin-right: 120px;
+}

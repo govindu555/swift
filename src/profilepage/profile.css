@@ -1,0 +1,80 @@
+.profile{
+    width: 100vw;
+    height: 100vh;
+    margin-top: 100px;
+    margin-left: 120px;
+    margin-right: 120px;
+}
+
+.profile2{
+    border-style: solid;
+    border-width: 1px;
+    margin-top: 50px;
+    margin-right: 230px;
+    padding: 50px;
+    border-radius: 20px;
+    border-color: gray;
+    box-shadow: 5px 5px 5px gray;
+}
+
+.profiletext{
+    font-size: 30px;
+}
+
+.profilehead{
+    display: flex; 
+}
+
+.profilehead2{
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.profiletext2{
+    font-size: 20px;
+    margin-left: 20px;
+}
+.profiletext3{
+   font-size: 15px;
+   margin-left: 20px;
+   color: gray;
+}
+
+.profilelogo{
+    width: 100px;
+    height: 90px;
+    border-style: solid;
+    border-width: 0px;
+    border-radius: 100px;
+    text-align: center;
+    padding-top: 20px;
+    font-size: 40px;
+    background-color:rgb(245, 245, 245);
+}
+
+.back{
+    cursor: pointer;
+    color: gray;
+    text-shadow: 2px gray;
+}
+
+.row{
+    display: grid;
+    grid-template-columns: 600px 600px;
+    margin-top: 10px;
+}
+
+.profileuser{
+    font-size:18px;
+    color: gray;
+}
+
+.profileuser2{
+    font-size: 18px;
+    width: 500px;
+    height: 40px;
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color:rgb(245, 245, 245);
+    border-radius:5px;
+}
