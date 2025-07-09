@@ -1,5 +1,7 @@
 import "./navbar.css"
 
+
+// display tha navbar
 const NavbarPage=()=>{
     return(
         <div className="navbar">

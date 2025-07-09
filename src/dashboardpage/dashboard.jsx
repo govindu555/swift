@@ -3,20 +3,24 @@ import {ClimbingBoxLoader} from "react-spinners"
 import "./dashboard.css"
 import { NavLink } from "react-router-dom";
 
-
+//evry line of code and logics is my own thinking.
+// maximum tryed to develop this. 
 const DashboardPage=()=>{
 
-    const [userdata,setUserdata]=useState([])
-    const [pagesize,setPagesize]=useState(10)
-    const [count,setCount]=useState(1)
+    const [userdata,setUserdata]=useState([]) //store total data from API
+    const [pagesize,setPagesize]=useState(10) //to pagenation
+    const [count,setCount]=useState(1) //to count data
 
     useEffect(()=>{
                fetch("https://jsonplaceholder.typicode.com/comments")
               .then(res=>res.json())
+              //res.slice((count-1)*parseInt(pagesize),count*parseInt(pagesize)).
+              //which importance is create the pages and display no.of items from page. 
               .then(res=>setUserdata(res.slice((count-1)*parseInt(pagesize),count*parseInt(pagesize))))        
 
     },[count,pagesize])
 
+    //item.name.includes(e.target.value) || item.email.includes(e.target.value) || item.body.includes(e.target.value)) this logic is search tha name , email , comment from list.
     const searchfun=(e)=>{
          setUserdata(userdata.filter(item=>item.name.includes(e.target.value) || item.email.includes(e.target.value) || item.body.includes(e.target.value)))
 }

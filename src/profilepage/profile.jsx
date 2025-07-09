@@ -2,9 +2,10 @@ import { useEffect, useState } from "react"
 import "./profile.css"
 import { useNavigate } from "react-router-dom"
 
+// this entire code is my own
 const ProfilePage=()=>{
 
-    const [profiledata,setProfiledata]=useState([])
+    const [profiledata,setProfiledata]=useState([]) // store profile data from API
 
     useEffect(()=>{
         fetch("https://jsonplaceholder.typicode.com/users/2")
@@ -14,7 +15,8 @@ const ProfilePage=()=>{
 
     const nav=useNavigate()
 
-     const errorfun=()=>{
+    // to navigate to dashboard using useNavigate hook
+     const arrowfun=()=>{
          nav("/")
      }
      
@@ -22,7 +24,7 @@ const ProfilePage=()=>{
     return(
         <div className="profile">
             <div>
-                <h1 className="profiletext"><span className="back" onClick={errorfun}>{`<<< `}</span>Welcome, Ervin Howell</h1>
+                <h1 className="profiletext"><span className="back" onClick={arrowfun}>{`<<< `}</span>Welcome, Ervin Howell</h1>
                 <div className="profile2">
                   <div className="profilehead">
                     <div className="profilelogo">EH</div>
