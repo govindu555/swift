@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {ClimbingBoxLoader} from "react-spinners"
 import "./dashboard.css"
 import { NavLink } from "react-router-dom";
+import axios from "axios"
 
 //evry line of code and logics is my own thinking.
 // maximum tryed to develop this. 
@@ -10,19 +11,43 @@ const DashboardPage=()=>{
     const [userdata,setUserdata]=useState([]) //store total data from API
     const [pagesize,setPagesize]=useState(10) //to pagenation
     const [count,setCount]=useState(1) //to count data
+    const [search,setSearch]=useState([])// to store data
 
     useEffect(()=>{
-               fetch("https://jsonplaceholder.typicode.com/comments")
-              .then(res=>res.json())
+        back()
+             //  fetch("https://jsonplaceholder.typicode.com/comments")
+              //.then(res=>res.json())
               //res.slice((count-1)*parseInt(pagesize),count*parseInt(pagesize)).
               //which importance is create the pages and display no.of items from page. 
-              .then(res=>setUserdata(res.slice((count-1)*parseInt(pagesize),count*parseInt(pagesize))))        
+              //.then(res=>setUserdata(res.slice((count-1)*parseInt(pagesize),count*parseInt(pagesize))))        
 
     },[count,pagesize])
 
+    async function back(){
+       let d= await axios.get("https://jsonplaceholder.typicode.com/comments")
+       setSearch(d.data.slice((count-1)*parseInt(pagesize),count*parseInt(pagesize)))
+       setUserdata(d.data.slice((count-1)*parseInt(pagesize),count*parseInt(pagesize)))
+    }
+
     //item.name.includes(e.target.value) || item.email.includes(e.target.value) || item.body.includes(e.target.value)) this logic is search tha name , email , comment from list.
     const searchfun=(e)=>{
-         setUserdata(userdata.filter(item=>item.name.includes(e.target.value) || item.email.includes(e.target.value) || item.body.includes(e.target.value)))
+         setUserdata(search.filter(item=>item.name.includes(e.target.value) || item.email.includes(e.target.value) || item.body.includes(e.target.value)))
+}
+
+function ascendingname(){
+    let data=[...userdata]
+    if(data.length>0){
+        let result=data.sort((a,b)=>a.name.localeCompare(b.name))
+        setUserdata(result)
+    }
+}
+
+function ascendingemail(){
+    let data=[...userdata]
+    if(data.length>0){
+        let result=data.sort((a,b)=>a.email.localeCompare(b.email))
+        setUserdata(result)
+    }
 }
 
     return(
@@ -30,8 +55,8 @@ const DashboardPage=()=>{
             <div className="dashmain">
                 <div className="sortmain">
                     <button className="sort">Sort Post ID</button>
-                    <button className="sort">Sort Name</button>
-                    <button className="sort">Sort Email</button>
+                    <button className="sort" onClick={ascendingname}>Sort Name</button>
+                    <button className="sort" onClick={ascendingemail}>Sort Email</button>
                 </div>
                     <input className="search" type="search" placeholder="Search name,email,comment" onChange={searchfun}/>
             </div>
