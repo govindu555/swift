@@ -31,7 +31,18 @@ const DashboardPage=()=>{
 
     //item.name.includes(e.target.value) || item.email.includes(e.target.value) || item.body.includes(e.target.value)) this logic is search tha name , email , comment from list.
     const searchfun=(e)=>{
-         setUserdata(search.filter(item=>item.name.includes(e.target.value) || item.email.includes(e.target.value) || item.body.includes(e.target.value)))
+         let result=search.filter(item=>item.name.includes(e.target.value) || item.email.includes(e.target.value) || item.body.includes(e.target.value))
+          if(result.length>0){
+            setUserdata(result)
+          }
+        }
+
+function ascendingid(){
+    let data=[...userdata]
+    if(data.length>0){
+    let result=data.sort((a,b)=>b.postId.localeCompare(a.postId))
+    setUserdata(result)
+    }
 }
 
 function ascendingname(){
@@ -54,7 +65,7 @@ function ascendingemail(){
         <div className="dashboard">
             <div className="dashmain">
                 <div className="sortmain">
-                    <button className="sort">Sort Post ID</button>
+                    <button className="sort" onClick={ascendingid}>Sort Post ID</button>
                     <button className="sort" onClick={ascendingname}>Sort Name</button>
                     <button className="sort" onClick={ascendingemail}>Sort Email</button>
                 </div>
